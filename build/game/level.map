@@ -1,0 +1,19 @@
+[level]
+map = ..........
+      .########.
+      .#......#.
+      .#...##.#.
+      .##.##..#.
+      .....####.
+
+[.]
+name = floor
+tile = grass.png
+wall = false
+block = false
+
+[#]
+name = wall
+tile = wall.png
+wall = true
+block = true
