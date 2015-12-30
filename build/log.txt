@@ -1,0 +1,25 @@
+running build
+running py2exe
+
+  11 missing Modules                 
+  ------------------                 
+? MacOS                               imported from pygame.macosx
+? Numeric                             imported from pygame
+? OpenGL                              imported from pygame
+? Py25Queue                           imported from pygame.threads
+? Queue                               imported from pygame.threads
+? itertools.imap                      imported from pygame.compat
+? numpy                               imported from pygame, pygame._numpysndarray, pygame._numpysurfarray
+? pkg_resources                       imported from pygame.pkgdata
+? readline                            imported from cmd, code, pdb
+? win32api                            imported from platform
+? win32con                            imported from platform
+
+  5 submodules that appear to be missing, but could also be global names in the parent package
+  ---------------------------------------------------------------------------------------------
+? pygame.SRCALPHA                     imported from pygame.ftfont
+? pygame._numericsndarray             imported from pygame.sndarray
+? pygame._numericsurfarray            imported from pygame.surfarray
+? pygame._view                        imported from pygame
+? pygame.sdlmain_osx                  imported from pygame.macosx
+Building 'build\program.exe'.
