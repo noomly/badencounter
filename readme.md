@@ -15,3 +15,10 @@ This python program require:
 * `py2exe 0.9.2.2	(win32)` https://pypi.python.org/packages/any/p/py2exe/py2exe-0.9.2.2.win32.exe
 
 When the environment is installed and configured, you can simply launch the script "py2exe".
+
+## Compatibility
+BadEncounter has been tested and is normally working on:
+
+* ArchLinux 64bits
+* Windows 8 64bits
+* Windows 7 64bits
