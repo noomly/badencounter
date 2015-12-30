@@ -14,7 +14,7 @@ This python program require:
 * `pygame 1.9.2		(win32)` https://bitbucket.org/pygame/pygame/downloads/pygame-1.9.2a0-hg_56e0eadfc267.win32-py3.3.msi
 * `py2exe 0.9.2.2	(win32)` https://pypi.python.org/packages/any/p/py2exe/py2exe-0.9.2.2.win32.exe
 
-When the environment is installed and configured, you can simply launch the script "py2exe".
+When the environment is installed and configured, you can simply launch the script "py2exe.bat".
 
 ## Compatibility
 BadEncounter has been tested and is normally working on:
