@@ -32,6 +32,10 @@ class Level(object):
                 self.key[section] = dict(parser.items(section))
 
 
+    def get_map_size(self):
+        return (self.map_width, self.map_height)
+
+
     def get_tile(self, x, y):
         try:
             char = self.map[y][x]

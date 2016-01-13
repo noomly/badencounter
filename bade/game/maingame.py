@@ -28,10 +28,8 @@ class MainGame(object):
 
         level1 = Level(self.graphics, "game/level")
 
-        #self.screen.blit(pygame.transform.scale(level1.draw(), (800, 600)), (0, 0))
-
-
-        finalrender = pygame.Surface((160, 96))
+        finalrender = pygame.Surface((level1.get_map_size()[0] * c.TILE_SIZE,
+                                      level1.get_map_size()[1] * c.TILE_SIZE))
 
         goon = True
         while goon:
