@@ -26,25 +26,26 @@ class MainGame(object):
     def game_loop(self):
         print("Entering game_loop")
 
-        level1 = Level(self.graphics, "game/level")
+        levels = Level(self.graphics, "home")
 
-        finalrender = pygame.Surface((level1.get_map_size()[0] * c.TILE_SIZE,
-                                      level1.get_map_size()[1] * c.TILE_SIZE))
+        finalrender = pygame.Surface((levels.get_map_size()[0] * c.TILE_SIZE,
+                                      levels.get_map_size()[1] * c.TILE_SIZE))
 
         goon = True
         while goon:
-            print(self.clock.get_fps())
+            #print(self.clock.get_fps())
 
+            #events
             for event in pygame.event.get():
                 if event.type == QUIT:
                     goon = False
 
-            # events
+                levels.event(event)
 
             # updates
 
             # draws
-            finalrender.blit(level1.draw(), (0, 0))
+            finalrender.blit(levels.draw(), (0, 0))
 
             self.screen.blit(pygame.transform.scale(finalrender,
                                                     (c.WINDOW_WIDTH,

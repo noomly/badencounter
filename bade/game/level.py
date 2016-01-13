@@ -4,14 +4,11 @@ import pygame.locals
 import configparser
 
 class Level(object):
-    def __init__(self, graphics, levelname):
+    def __init__(self, graphics, initialmap):
         self.graphics = graphics
-        self.levelname = levelname
 
-        self.map = []
-
-        self.map_width = -1
-        self.map_height = -1
+        self.maps = {}
+        self.currentmap = initialmap
 
         self.key = {}
 
@@ -20,25 +17,32 @@ class Level(object):
 
     def __load_file(self):
         parser = configparser.ConfigParser()
-        parser.read(self.levelname + ".map")
-
-        self.map = str(parser.get("level", "map")).split("\n")
-
-        self.map_width = len(self.map[0])
-        self.map_height = len(self.map)
+        parser.read("game/level.map")
 
         for section in parser.sections():
             if len(section) == 1:
                 self.key[section] = dict(parser.items(section))
+            else:
+                self.maps[section] = dict(parser.items(section))
+                self.maps[section]["map"] = str(self.maps[section]["map"]).split("\n")
+
+                self.maps[section]["width"] = len(self.maps[section]["map"][0])
+                self.maps[section]["height"] = len(self.maps[section]["map"])
+
+            #try:
+            #    assert len(self.maps[section]["map"]) == 6
+            #except Exception:
+            #    print("ERROR: map size isn't respectful")
 
 
     def get_map_size(self):
-        return (self.map_width, self.map_height)
+        return (self.maps[self.currentmap]["width"],
+                self.maps[self.currentmap]["height"])
 
 
     def get_tile(self, x, y):
         try:
-            char = self.map[y][x]
+            char = self.maps[self.currentmap]["map"][y][x]
         except IndexError as ex:
             print(ex)
 
@@ -61,12 +65,28 @@ class Level(object):
             return self.get_bool(x, y, 'block')
 
 
-    def draw(self):
-        render = pygame.Surface((self.map_width*16, self.map_height*16))
+    def event(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                print("moving north")
 
-        for y, line in enumerate(self.map):
+            if event.key == pygame.K_RIGHT:
+                print("moving east")
+
+            if event.key == pygame.K_DOWN:
+                print("moving south")
+
+            if event.key == pygame.K_LEFT:
+                print("moving west")
+
+    def draw(self):
+        width, height = self.get_map_size()
+
+        render = pygame.Surface((width*16, height*16))
+
+        for y, line in enumerate(self.maps[self.currentmap]["map"]):
             for x, char in enumerate(line):
-                render.blit(self.graphics[self.get_tile(x, y).get("tile")],
+                render.blit(self.graphics[self.get_tile(x, y).get("file")],
                             (x*16, y*16))
 
         return render
