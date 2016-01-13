@@ -1,19 +1,36 @@
-[level]
+[home]
 map = ..........
       .########.
       .#......#.
       .#...##.#.
       .##.##..#.
       .....####.
+north = void
+east = void
+south = outside1
+west = void
+
+[outside1]
+map = ...............
+      ...............
+      ...............
+      ......##.......
+      ......##.......
+      ...............
+      ...............
+north = void
+east = void
+south = void
+west = void
 
 [.]
 name = floor
-tile = grass.png
+file = grass.png
 wall = false
 block = false
 
 [#]
 name = wall
-tile = wall.png
+file = wall.png
 wall = true
 block = true
