@@ -13,7 +13,7 @@ class Level(object):
         self.key = {}
 
         self.__load_file()
-
+pass
 
     def __load_file(self):
         parser = configparser.ConfigParser()
