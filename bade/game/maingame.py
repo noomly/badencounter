@@ -5,11 +5,12 @@ from pygame.locals import *
 
 import consts as c
 from game.level import Level
+from game.mob.bobby import Bobby
 
 
 class MainGame(object):
     def __init__(self):
-        print("MainGame initializing...")
+        print("Initializing game...")
 
         self.screen = pygame.display.set_mode((c.WINDOW_WIDTH,
                                                c.WINDOW_HEIGHT))
@@ -18,9 +19,6 @@ class MainGame(object):
 
         self.graphics = {}
         self.__load_graphics()
-        print(self.graphics)
-
-        print("MainGame initialized")
 
 
     def game_loop(self):
@@ -28,8 +26,10 @@ class MainGame(object):
 
         levels = Level(self.graphics, "home")
 
-        finalrender = pygame.Surface((levels.get_map_size()[0] * c.TILE_SIZE,
-                                      levels.get_map_size()[1] * c.TILE_SIZE))
+        bobby = Bobby(self.graphics)
+
+        finalrender = pygame.Surface((levels.get_map_size()[0],
+                                      levels.get_map_size()[1]))
 
         goon = True
         while goon:
@@ -42,10 +42,23 @@ class MainGame(object):
 
                 levels.event(event)
 
+                bobby.event(event, levels)
+
             # updates
+            move = bobby.update(levels.get_map_size())
+
+            levels.update(move, bobby)
+            #print(levels.get_tile(1, 1))
+
+            if finalrender.get_width() != levels.get_map_size()[0] or finalrender.get_height() != levels.get_map_size()[1]:
+                finalrender = pygame.Surface((levels.get_map_size()[0],
+                                              levels.get_map_size()[1]))
 
             # draws
             finalrender.blit(levels.draw(), (0, 0))
+
+            b_x, b_y = bobby.get_pos()
+            finalrender.blit(bobby.draw(), (b_x, b_y))
 
             self.screen.blit(pygame.transform.scale(finalrender,
                                                     (c.WINDOW_WIDTH,
@@ -63,6 +76,9 @@ class MainGame(object):
         for subdir, dirs, files in os.walk("res"):
             for item in files:
                 if item.lower().endswith('.png'):
-                    self.graphics[item] = pygame.image.load(str(subdir) + "/" +
-                                                            str(item)).convert()
+                    try:
+                        self.graphics[item] = pygame.image.load(str(subdir) + "/" +
+                                                                str(item)).convert_alpha()
+                    except Exception as ex:
+                        print("caught exception at __load_graphics():", ex)
 

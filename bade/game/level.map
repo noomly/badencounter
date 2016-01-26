@@ -1,36 +1,43 @@
 [home]
-map = ..........
-      .########.
-      .#......#.
-      .#...##.#.
-      .##.##..#.
-      .....####.
-north = void
-east = void
-south = outside1
-west = void
+map = wwwwwwwwww
+      w........w
+      w.........
+      w.........
+      w........w
+      wwwwwwwwww
+east = outside1
 
 [outside1]
-map = ...............
-      ...............
-      ...............
-      ......##.......
-      ......##.......
-      ...............
-      ...............
-north = void
-east = void
-south = void
-west = void
+map = wwwwwwwwwwwwwww
+      w.............w
+      ..............w
+      ......ww......w
+      w.....ww......w
+      w.............w
+      w..wwwwwwwwwwww
+west = home
+south = outside2
+
+[outside2]
+map = w..www
+      w....w
+      w....w
+      wwwwww
+north = outside1
+
 
 [.]
-name = floor
+name = grass
 file = grass.png
-wall = false
 block = false
 
-[#]
+[w]
 name = wall
 file = wall.png
-wall = true
 block = true
+
+[1]
+name = oldone
+file = oldone.png
+block = false
+
