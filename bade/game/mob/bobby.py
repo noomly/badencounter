@@ -11,6 +11,8 @@ class Bobby:
 
         self.pos = [1*c.TILE_SIZE, 1*c.TILE_SIZE]
 
+        self.looking_at = "right"
+
 
     def get_pos(self):
         return self.pos
@@ -29,23 +31,28 @@ class Bobby:
         if move == "west":
             self.pos[0] = map_size[0] - c.TILE_SIZE
 
+
     def event(self, event, levels):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE-1)):
                 self.pos[1] -= c.TILE_SIZE
+                self.looking_at = "up"
 
             if event.key == pygame.K_RIGHT and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE+1), int(self.pos[1]/c.TILE_SIZE)):
                 self.pos[0] += c.TILE_SIZE
+                self.looking_at = "right"
 
             if event.key == pygame.K_DOWN and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE+1)):
                 self.pos[1] += c.TILE_SIZE
+                self.looking_at = "down"
 
             if event.key == pygame.K_LEFT and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE-1), int(self.pos[1]/c.TILE_SIZE)):
                 self.pos[0] -= c.TILE_SIZE
+                self.looking_at = "left"
 
 
     def update(self, map_size):
@@ -69,7 +76,22 @@ class Bobby:
     def draw(self):
         render = pygame.Surface((c.TILE_SIZE, c.TILE_SIZE), pygame.SRCALPHA)
 
-        render.blit(pygame.transform.scale(self.graphics["mario.png"], (16, 16)), (0, 0))
+        sprite = pygame.transform.scale(self.graphics["mario_right.png"], (c.TILE_SIZE, c.TILE_SIZE))
+
+        if self.looking_at == "up":
+            pass
+
+        if self.looking_at == "right":
+            pass
+
+        if self.looking_at == "down":
+            sprite = pygame.transform.flip(sprite, False, True)
+
+        if self.looking_at == "left":
+            sprite = pygame.transform.flip(sprite, True, False)
+
+        render.blit(sprite, (0, 0))
+
 
         return render
 
