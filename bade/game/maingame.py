@@ -5,6 +5,7 @@ from pygame.locals import *
 
 import consts as c
 from game.level import Level
+from game.menu import Menu
 from game.mob.bobby import Bobby
 
 
@@ -21,8 +22,60 @@ class MainGame(object):
         self.__load_graphics()
 
 
-    def game_loop(self):
-        print("Entering game_loop")
+    def main_loop(self):
+        print("entering main_loop")
+
+        state = "MENU" # MENU, GAME, EXIT
+
+        while state != "EXIT":
+            if state == "MENU":
+                state = self.__menu()
+
+            if state == "GAME":
+                state = self.__game()
+
+        print("exiting main_loop")
+
+
+    def __menu(self):
+        print("entering __menu")
+
+        menu = Menu(self.graphics, ("hello", "world"))
+
+        goon = True
+        while goon:
+            # events
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    goon = False
+
+                menu.event(event)
+
+            # updates
+            menu.update()
+
+            # draws
+            finalrender = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
+
+            finalrender.blit(menu.draw(), (0, 0))
+
+            self.screen.blit(pygame.transform.scale(finalrender,
+                                                    (c.WINDOW_WIDTH,
+                                                     c.WINDOW_HEIGHT)),
+                             (0, 0))
+
+            pygame.display.flip()
+
+            self.clock.tick(15)
+
+
+        print("exiting __menu")
+
+        return "EXIT"
+
+
+    def __game(self):
+        print("entering __game")
 
         levels = Level(self.graphics, "home")
 
@@ -69,7 +122,7 @@ class MainGame(object):
 
             self.clock.tick(15)
 
-        print("Exiting game_loop")
+        print("exiting __game")
 
 
     def __load_graphics(self):
