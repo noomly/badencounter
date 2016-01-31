@@ -23,8 +23,10 @@ class Menu:
     def event(self, event):
         for button in self.buttons:
             button.event(event)
-            if button.get_button_state() == "CLICKED":
+            if button.get_button_state() == "CLICK":
                 self.clicked_button_txt = button.get_button_txt()
+
+                print(button.get_button_txt())
 
 
     def update(self):
@@ -95,4 +97,4 @@ class Button:
         return self.button_state
 
     def get_button_txt(self):
-        return self.button_txt
+        return self.caption

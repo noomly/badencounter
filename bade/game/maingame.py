@@ -11,8 +11,6 @@ from game.mob.bobby import Bobby
 
 class MainGame(object):
     def __init__(self):
-        print("Initializing game...")
-
         self.screen = pygame.display.set_mode((c.WINDOW_WIDTH,
                                                c.WINDOW_HEIGHT))
 
@@ -25,7 +23,7 @@ class MainGame(object):
     def main_loop(self):
         print("entering main_loop")
 
-        state = "MENU" # MENU, GAME, EXIT
+        state = "GAME" # MENU, GAME, EXIT
 
         while state != "EXIT":
             if state == "MENU":
@@ -40,7 +38,7 @@ class MainGame(object):
     def __menu(self):
         print("entering __menu")
 
-        menu = Menu(self.graphics, ("hello", "world"))
+        menu = Menu(self.graphics, ("play", "exit"))
 
         goon = True
         while goon:
@@ -123,6 +121,8 @@ class MainGame(object):
             self.clock.tick(15)
 
         print("exiting __game")
+
+        return "EXIT"
 
 
     def __load_graphics(self):
