@@ -23,7 +23,7 @@ class MainGame(object):
     def main_loop(self):
         print("entering main_loop")
 
-        state = "GAME" # MENU, GAME, EXIT
+        state = "MENU" # MENU, GAME, EXIT
 
         while state != "EXIT":
             if state == "MENU":
@@ -38,8 +38,9 @@ class MainGame(object):
     def __menu(self):
         print("entering __menu")
 
-        menu = Menu(self.graphics, ("play", "exit"))
+        menu = Menu(self.graphics, ("Bad Encounter", "play", "exit"))
 
+        state_to_return = "EXIT"
         goon = True
         while goon:
             # events
@@ -51,6 +52,16 @@ class MainGame(object):
 
             # updates
             menu.update()
+
+            choice = menu.get_clicked_button_txt()
+
+            if choice == "play":
+                state_to_return = "GAME"
+                goon = False
+
+            if choice == "exit":
+                state_to_return = "EXIT"
+                goon = False
 
             # draws
             finalrender = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
@@ -64,12 +75,11 @@ class MainGame(object):
 
             pygame.display.flip()
 
-            self.clock.tick(15)
-
+            self.clock.tick(60)
 
         print("exiting __menu")
 
-        return "EXIT"
+        return state_to_return
 
 
     def __game(self):
@@ -82,6 +92,7 @@ class MainGame(object):
         finalrender = pygame.Surface((levels.get_map_size()[0],
                                       levels.get_map_size()[1]))
 
+        state_to_return = "EXIT"
         goon = True
         while goon:
             #print(self.clock.get_fps())
@@ -97,6 +108,10 @@ class MainGame(object):
 
             # updates
             move = bobby.update(levels.get_map_size())
+
+            if bobby.get_state_to_return() == "MENU":
+                state_to_return = "MENU"
+                goon = False
 
             levels.update(move, bobby)
             #print(levels.get_tile(1, 1))
@@ -122,7 +137,7 @@ class MainGame(object):
 
         print("exiting __game")
 
-        return "EXIT"
+        return state_to_return
 
 
     def __load_graphics(self):

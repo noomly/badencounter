@@ -13,9 +13,15 @@ class Bobby:
 
         self.looking_at = "right"
 
+        self.state_to_return = ""
+
 
     def get_pos(self):
         return self.pos
+
+
+    def get_state_to_return(self):
+        return self.state_to_return
 
 
     def update_pos(self, move, map_size):
@@ -34,6 +40,9 @@ class Bobby:
 
     def event(self, event, levels):
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                self.state_to_return = "MENU" # TODO: MAKE IT POSSIBLE TO CHANGE THE STATE
+
             if event.key == pygame.K_UP and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE-1)):
                 self.pos[1] -= c.TILE_SIZE
