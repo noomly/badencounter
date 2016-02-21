@@ -1,5 +1,4 @@
 import pygame
-
 from pygame.locals import *
 
 import consts as c
@@ -16,6 +15,8 @@ class Menu:
 
         #self.background_img = pygame.image.load("res/background_menu.png").convert_alpha()
         #self.background_img = pygame.transform.scale(self.background_img, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
+        #self.logo_img TODO: Draw a logo
 
         self.clicked_button_txt = "NONE"
 

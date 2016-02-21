@@ -13,6 +13,8 @@ def main():
     pygame.display.init()
     pygame.font.init()
 
+    pygame.key.set_repeat(1, 1) # 280 seems to be fine
+
     game = MainGame()
     game.main_loop()
 

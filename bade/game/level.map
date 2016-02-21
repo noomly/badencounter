@@ -2,29 +2,52 @@
 map = wwwwwwwwww
       w........w
       w.........
-      w.........
+      ..........
       w........w
       wwwwwwwwww
 east = outside1
+west = outside4
 
 [outside1]
-map = wwwwwwwwwwwwwww
-      w.............w
-      ..............w
-      ......ww......w
-      w.....ww......w
-      w.............w
-      w..wwwwwwwwwwww
+map = wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+      w.............................w
+      ..............................w
+      ..............................w
+      w.............................w
+      w.............................w
+      w..wwwwwwwwwwwwwwwwwwwwwwwwwwww
 west = home
 south = outside2
 
 [outside2]
 map = w..www
-      w....w
-      w....w
+      w.....
+      w.....
       wwwwww
 north = outside1
+east = outside3
 
+[outside3]
+map = wwwwwww
+      ......w
+      ......w
+      wwww..w
+west = outside2
+south = outside4
+
+[outside4]
+map = wwww..wwww
+      w........w
+      w........w
+      w.........
+      w........w
+      w........w
+      wwwwwwwwww
+north = outside3
+east = outside5
+
+[outside5]
+map = wwwwwwwwwwwww
 
 [.]
 name = grass

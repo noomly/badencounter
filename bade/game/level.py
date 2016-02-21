@@ -1,9 +1,9 @@
 import pygame
-import pygame.locals
 
 import configparser
 
 import consts as c
+
 
 class Level(object):
     def __init__(self, graphics, initialmap):
@@ -110,8 +110,9 @@ class Level(object):
 
         for y, line in enumerate(self.maps[self.currentmap]["map"]):
             for x, char in enumerate(line):
-                render.blit(self.graphics[self.get_tile(x, y).get("file")],
-                            (x*16, y*16))
+                render.blit(pygame.transform.scale(self.graphics[self.get_tile(x, y).get("file")],
+                                                   (c.TILE_SIZE, c.TILE_SIZE)),
+                                                   (x*c.TILE_SIZE, y*c.TILE_SIZE))
 
         return render
 

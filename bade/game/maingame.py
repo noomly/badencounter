@@ -7,7 +7,7 @@ import consts as c
 from game.level import Level
 from game.menu import Menu
 from game.mob.bobby import Bobby
-
+from game.dialog import Dialog
 
 class MainGame(object):
     def __init__(self):
@@ -96,18 +96,20 @@ class MainGame(object):
         goon = True
         while goon:
             #print(self.clock.get_fps())
+            deltatime = self.clock.tick(30) / 100.0
 
             #events
             for event in pygame.event.get():
                 if event.type == QUIT:
                     goon = False
+                    test.draw()
 
                 levels.event(event)
 
-                bobby.event(event, levels)
+                bobby.event(event)
 
             # updates
-            move = bobby.update(levels.get_map_size())
+            move = bobby.update(deltatime, levels.get_map_size(), levels)
 
             if bobby.get_state_to_return() == "MENU":
                 state_to_return = "MENU"
@@ -131,9 +133,13 @@ class MainGame(object):
                                                      c.WINDOW_HEIGHT)),
                              (0, 0))
 
-            pygame.display.flip()
+            my_font = pygame.font.Font(None, 22)
+            my_string = "Hi there! I'm a nice bit of wordwrapped text. Won't you be my friend? Honestly, wordwrapping is easy, with David's fancy new render_textrect() function.\nThis is a new line.\n\nThis is another one.\n\n\nAnother line, you lucky dog."
+            my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/5))
+            rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
+            self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
-            self.clock.tick(15)
+            pygame.display.flip()
 
         print("exiting __game")
 
