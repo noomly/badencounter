@@ -34,7 +34,7 @@ copy game\level.map ..\build\game\level.map >nul
 echo copying characters folder to build dir...
 mkdir ..\build\game\characters
 copy game\characters ..\build\game\characters >nul
-del ..\build\res\__init__.py
+del ..\build\game\characters\__init__.py
 
 echo copying res folder to build dir...
 mkdir ..\build\res
