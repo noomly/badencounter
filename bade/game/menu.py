@@ -13,6 +13,7 @@ class Menu:
         self.title_font = pygame.font.Font("res/edosz.ttf", 110)
         self.title_text = "Bad Encounter"
         self.title_rendered = self.title_font.render(self.title_text, 1, (255, 50, 50))
+        self.title_shadow = self.title_font.render(self.title_text, 1, (150, 50, 50))
 
         for i in range(0, len(buttons_txt), 1):
             self.buttons.append(Button(self.graphics, buttons_txt[i], c.WINDOW_WIDTH / 2, 300 + i * 100))
@@ -38,6 +39,7 @@ class Menu:
         render = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
 
         render.blit(self.background_img, (0, 0))
+        render.blit(self.title_shadow, (c.WINDOW_WIDTH / 2 - self.title_shadow.get_width()/2 - 5, 250 / 2 - self.title_shadow.get_height()/2+5))
         render.blit(self.title_rendered, (c.WINDOW_WIDTH / 2 - self.title_rendered.get_width()/2, 250 / 2 - self.title_rendered.get_height()/2))
 
         for button in self.buttons:

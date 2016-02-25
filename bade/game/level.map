@@ -9,16 +9,16 @@ east = outside1
 west = outside4
 
 [outside1]
-map = wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-      w.............................w
-      ..............................w
-      ..............................w
-      w.............................w
-      w.............................w
-      w.............................w
-      w.............................w
-      w.............................w
-      w..wwwwwwwwwwwwwwwwwwwwwwwwwwww
+map = mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+      m.............................m
+      ..............................m
+      ..............................m
+      m.............................m
+      m.............................m
+      m.............................m
+      m.............................m
+      m.............................m
+      m..mmmmmmmmmmmmmmmmmmmmmmmmmmmm
 west = home
 south = outside2
 
@@ -64,6 +64,12 @@ pnj = false
 [w]
 name = wall
 file = wall2.png
+block = true
+pnj = false
+
+[m]
+name = tree
+file = tree.png
 block = true
 pnj = false
 
