@@ -192,7 +192,7 @@ class MainGame(object):
              "Drawing : Maréva SEI and Alycia MOLLE"]
 
         font_continue = pygame.font.Font("res/ubuntumono-r.ttf", 22)
-        rendered_text_continue = font_continue.render("Press Escape or Enter to get back to the menu...", 1, (150, 150, 150))
+        rendered_text_continue = font_continue.render("Click or press Escape or Enter to get back to the menu ...", 1, (150, 150, 150))
 
         state_to_return = "EXIT"
         goon = True
@@ -206,6 +206,10 @@ class MainGame(object):
                     if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
                         state_to_return = "MENU"
                         goon = False
+
+                if event.type == pygame.MOUSEBUTTONUP:
+                    state_to_return = "MENU"
+                    goon = False
 
             # updates
 
