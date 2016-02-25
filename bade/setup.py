@@ -12,6 +12,6 @@ setup(
                           'dist_dir': 'build\\'
                           }
                },
-    console = ['program.py'],
+    windows = ['program.py'],
     zipfile = None,
 )
