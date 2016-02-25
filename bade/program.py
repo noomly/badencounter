@@ -13,6 +13,7 @@ def main():
     pygame.display.init()
     pygame.font.init()
 
+    pygame.display.set_caption("Bad Encouter - Created by Eyal CHOJNOWSKI, Maréva SEI, Alycia MOLLE for the TPE of 2016", "Bad Encounter")
     #pygame.key.set_repeat(1, 0) # 280 seems to be fine
 
     game = MainGame()
