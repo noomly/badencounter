@@ -79,7 +79,7 @@ class Dialog:
         surface = pygame.Surface(rect.size, pygame.SRCALPHA)
         surface.fill(background_color)
 
-        accumulated_height = 0
+        accumulated_height = 5
         for line in final_lines:
             if accumulated_height + font.size(line)[1] >= rect.height:
                 print("ERROR")
@@ -93,7 +93,7 @@ class Dialog:
                     surface.blit(tempsurface, (rect.width+rectwidth_adjust - tempsurface.get_width(), accumulated_height))
                 else:
                     print("ERROR")
-            accumulated_height += font.size(line)[1]
+            accumulated_height += font.size(line)[1] + 2
 
         return surface
 

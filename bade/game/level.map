@@ -1,7 +1,7 @@
 [home]
 map = wwwwwwwwww
       w........w
-      w.....?...
+      w..w..?...
       ..........
       w........w
       wwwwwwwwww
@@ -56,14 +56,14 @@ pnj = true
 pnj_file = alex
 
 [.]
-name = grass
-file = grass.png
+name = grass1
+file = grass1.png
 block = false
 pnj = false
 
 [w]
 name = wall
-file = wall.png
+file = wall2.png
 block = true
 pnj = false
 

@@ -38,7 +38,7 @@ class MainGame(object):
     def __menu(self):
         print("entering __menu")
 
-        menu = Menu(self.graphics, ("Bad Encounter", "play", "exit"))
+        menu = Menu(self.graphics, ("play", "exit"))
 
         state_to_return = "EXIT"
         goon = True
@@ -152,12 +152,13 @@ class MainGame(object):
                 pnj_name = bob_value.split(' ')[1]
 
             elif in_dial:
-                my_font = pygame.font.Font("res/ubuntumono-r.ttf", 24)
+                my_font = pygame.font.Font("res/ubuntumono-r.ttf", 22)
                 my_string = levels.chars[pnj_name]["dials"][str(dial_count)]
                 my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
-                rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
+                rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 20, 175), 0)
                 self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
+                # TODO: Change head if ":" or "*"
                 head = pygame.transform.scale(self.graphics["mario_head.png"], (200, rendered_text.get_height()))
                 self.screen.blit(head, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
@@ -172,36 +173,10 @@ class MainGame(object):
         return state_to_return
 
 
-    def __dial(self, chars, char_name): # TODO: Move me to __game (transparent bug)
-        print("entering __dial")
-
-        goon = True
-        dial_count = 1
-
-        while goon:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_RETURN:
-                        dial_count += 1
-
-            my_font = pygame.font.Font("res/ubuntumono-r.ttf", 16)
-            my_string = chars[char_name]["dials"][str(dial_count)]
-            my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
-            rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
-            self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
-
-            head = pygame.transform.scale(self.graphics["mario_head.png"], (200, rendered_text.get_height()))
-            self.screen.blit(head, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
-
-            pygame.display.flip()
-
-        print("exiting __dial")
-
-
     def __load_graphics(self):
         for subdir, dirs, files in os.walk("res"):
             for item in files:
-                if item.lower().endswith('.png'):
+                if item.lower().endswith('.png') or item.lower().endswith('.jpg'):
                     try:
                         self.graphics[item] = pygame.image.load(str(subdir) + "/" +
                                                                 str(item)).convert_alpha()

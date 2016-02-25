@@ -171,7 +171,7 @@ class Level(object):
 
         for y, line in enumerate(self.maps[self.currentmap]["map"]):
             for x, char in enumerate(line):
-                render.blit(pygame.transform.scale(self.graphics["grass.png"],
+                render.blit(pygame.transform.scale(self.graphics["grass1.png"],
                                                    (c.TILE_SIZE, c.TILE_SIZE)),
                                                    (x*c.TILE_SIZE, y*c.TILE_SIZE))
 
