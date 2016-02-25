@@ -78,6 +78,8 @@ class Bobby:
     def update(self, deltatime, map_size, levels):
         self.speed_state += self.speed * deltatime
 
+        to_return = "null"
+
         if self.speed_state > 1:
             self.speed_state = 0
 
@@ -86,20 +88,53 @@ class Bobby:
                 self.pos[0] += c.TILE_SIZE
                 self.looking_at = "right"
 
+            elif self.moving_x > 0 and \
+                levels.is_pnj(int(self.pos[0]/c.TILE_SIZE+1), int(self.pos[1]/c.TILE_SIZE)):
+                    pnj_name = levels.get_pnj_name(int(self.pos[0]/c.TILE_SIZE+1), int(self.pos[1]/c.TILE_SIZE))
+                    if pnj_name != "null":
+                        to_return = "pnj " + pnj_name
+                        self.reset_x = True
+                        self.reset_y = True
+
             if self.moving_x < 0 and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE-1), int(self.pos[1]/c.TILE_SIZE)):
                 self.pos[0] -= c.TILE_SIZE
                 self.looking_at = "left"
+
+            elif self.moving_x < 0 and \
+                levels.is_pnj(int(self.pos[0]/c.TILE_SIZE-1), int(self.pos[1]/c.TILE_SIZE)):
+                    pnj_name = levels.get_pnj_name(int(self.pos[0]/c.TILE_SIZE-1), int(self.pos[1]/c.TILE_SIZE))
+                    if pnj_name != "null":
+                        to_return = "pnj " + pnj_name
+                        self.reset_x = True
+                        self.reset_y = True
+
 
             if self.moving_y > 0 and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE+1)):
                 self.pos[1] += c.TILE_SIZE
                 self.looking_at = "down"
 
+            elif self.moving_y > 0 and \
+                levels.is_pnj(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE+1)):
+                    pnj_name = levels.get_pnj_name(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE+1))
+                    if pnj_name != "null":
+                        to_return = "pnj " + pnj_name
+                        self.reset_x = True
+                        self.reset_y = True
+
             if self.moving_y < 0 and \
             not levels.is_blocking(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE-1)):
                 self.pos[1] -= c.TILE_SIZE
                 self.looking_at = "up"
+
+            elif self.moving_y < 0 and \
+                levels.is_pnj(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE-1)):
+                    pnj_name = levels.get_pnj_name(int(self.pos[0]/c.TILE_SIZE), int(self.pos[1]/c.TILE_SIZE-1))
+                    if pnj_name != "null":
+                        to_return = "pnj " + pnj_name
+                        self.reset_x = True
+                        self.reset_y = True
 
             if self.reset_x:
                 self.reset_x = False
@@ -111,19 +146,21 @@ class Bobby:
 
         if self.pos[1] < 0:
             print("move north")
-            return "north"
+            return "move north"
 
         if self.pos[0] > map_size[0] - c.TILE_SIZE:
             print("move east")
-            return "east"
+            return "move east"
 
         if self.pos[1] > map_size[1] - c.TILE_SIZE:
             print("move south")
-            return "south"
+            return "move south"
 
         if self.pos[0] < 0:
             print("move west")
-            return "west"
+            return "move west"
+
+        return to_return
 
 
     def draw(self):
@@ -151,7 +188,6 @@ class Bobby:
         self.looking_at = ""
 
         render.blit(self.bobby_img, (0, 0))
-
 
         return render
 

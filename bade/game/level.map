@@ -1,7 +1,7 @@
 [home]
 map = wwwwwwwwww
       w........w
-      w.........
+      w.....?...
       ..........
       w........w
       wwwwwwwwww
@@ -13,6 +13,9 @@ map = wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
       w.............................w
       ..............................w
       ..............................w
+      w.............................w
+      w.............................w
+      w.............................w
       w.............................w
       w.............................w
       w..wwwwwwwwwwwwwwwwwwwwwwwwwwww
@@ -44,23 +47,29 @@ map = wwww..wwww
       w........w
       wwwwwwwwww
 north = outside3
-east = outside5
+east = home
 
-[outside5]
-map = wwwwwwwwwwwww
+[?]
+file = mario_right.png
+block = true
+pnj = true
+pnj_file = alex
 
 [.]
 name = grass
 file = grass.png
 block = false
+pnj = false
 
 [w]
 name = wall
 file = wall.png
 block = true
+pnj = false
 
 [1]
 name = oldone
 file = oldone.png
 block = false
+pnj = false
 

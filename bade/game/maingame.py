@@ -92,6 +92,10 @@ class MainGame(object):
         finalrender = pygame.Surface((levels.get_map_size()[0],
                                       levels.get_map_size()[1]))
 
+        in_dial = False
+        pnj_name = "null"
+        dial_count = 1
+
         state_to_return = "EXIT"
         goon = True
         while goon:
@@ -102,21 +106,31 @@ class MainGame(object):
             for event in pygame.event.get():
                 if event.type == QUIT:
                     goon = False
-                    test.draw()
 
-                levels.event(event)
+                if in_dial:
+                    if event.type == pygame.KEYUP:
+                        if event.key == pygame.K_RETURN:
+                            dial_count += 1
 
-                bobby.event(event)
+                            try:
+                                levels.chars[pnj_name]["dials"][str(dial_count)]
+                            except Exception as ex:
+                                in_dial = False
+                                pnj_name = "null"
+                                dial_count = 1
+                else:
+                    levels.event(event)
+
+                    bobby.event(event)
 
             # updates
-            move = bobby.update(deltatime, levels.get_map_size(), levels)
+            bob_value = bobby.update(deltatime, levels.get_map_size(), levels)
 
             if bobby.get_state_to_return() == "MENU":
                 state_to_return = "MENU"
                 goon = False
 
-            levels.update(move, bobby)
-            #print(levels.get_tile(1, 1))
+            levels.update(bob_value, bobby)
 
             if finalrender.get_width() != levels.get_map_size()[0] or finalrender.get_height() != levels.get_map_size()[1]:
                 finalrender = pygame.Surface((levels.get_map_size()[0],
@@ -133,17 +147,55 @@ class MainGame(object):
                                                      c.WINDOW_HEIGHT)),
                              (0, 0))
 
-            my_font = pygame.font.Font(None, 22)
-            my_string = "Hi there! I'm a nice bit of wordwrapped text. Won't you be my friend? Honestly, wordwrapping is easy, with David's fancy new render_textrect() function.\nThis is a new line.\n\nThis is another one.\n\n\nAnother line, you lucky dog."
-            my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/5))
-            rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
-            self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
+            if bob_value.split(' ')[0] == "pnj" and not in_dial: # or in_dial
+                in_dial = True
+                pnj_name = bob_value.split(' ')[1]
 
+            elif in_dial:
+                my_font = pygame.font.Font("res/ubuntumono-r.ttf", 24)
+                my_string = levels.chars[pnj_name]["dials"][str(dial_count)]
+                my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
+                rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
+                self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
+
+                head = pygame.transform.scale(self.graphics["mario_head.png"], (200, rendered_text.get_height()))
+                self.screen.blit(head, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
+
+                continue_font = my_font
+                continue_font.set_italic(True)
+                continue_font_rendered = continue_font.render("Press enter to continue...", 1, (150, 150, 150))
+                self.screen.blit(continue_font_rendered, (c.WINDOW_WIDTH-continue_font_rendered.get_width(), c.WINDOW_HEIGHT - continue_font_rendered.get_height()))
             pygame.display.flip()
 
         print("exiting __game")
 
         return state_to_return
+
+
+    def __dial(self, chars, char_name): # TODO: Move me to __game (transparent bug)
+        print("entering __dial")
+
+        goon = True
+        dial_count = 1
+
+        while goon:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RETURN:
+                        dial_count += 1
+
+            my_font = pygame.font.Font("res/ubuntumono-r.ttf", 16)
+            my_string = chars[char_name]["dials"][str(dial_count)]
+            my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
+            rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 0, 128), 0)
+            self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
+
+            head = pygame.transform.scale(self.graphics["mario_head.png"], (200, rendered_text.get_height()))
+            self.screen.blit(head, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
+
+            pygame.display.flip()
+
+        print("exiting __dial")
 
 
     def __load_graphics(self):

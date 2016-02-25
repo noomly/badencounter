@@ -44,6 +44,8 @@ class Dialog:
         Failure - raises a TextRectException if the text won't fit onto the surface.
         """
 
+        rectwidth_adjust = 200
+
         final_lines = []
 
         requested_lines = string.splitlines()
@@ -52,18 +54,18 @@ class Dialog:
         # rectangle.
 
         for requested_line in requested_lines:
-            if font.size(requested_line)[0] > rect.width:
+            if font.size(requested_line)[0] > rect.width-rectwidth_adjust:
                 words = requested_line.split(' ')
                 # if any of our words are too long to fit, return.
                 for word in words:
-                    if font.size(word)[0] >= rect.width:
+                    if font.size(word)[0] >= rect.width-rectwidth_adjust:
                         print("ERROR")
                 # Start a new line
                 accumulated_line = ""
                 for word in words:
                     test_line = accumulated_line + word + " "
                     # Build the line while the words fit.
-                    if font.size(test_line)[0] < rect.width:
+                    if font.size(test_line)[0] < rect.width-rectwidth_adjust:
                         accumulated_line = test_line
                     else:
                         final_lines.append(accumulated_line)
@@ -84,11 +86,11 @@ class Dialog:
             if line != "":
                 tempsurface = font.render(line, 1, text_color)
                 if justification == 0:
-                    surface.blit(tempsurface, (0, accumulated_height))
+                    surface.blit(tempsurface, (rectwidth_adjust, accumulated_height))
                 elif justification == 1:
-                    surface.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
+                    surface.blit(tempsurface, ((rect.width+rectwidth_adjust - tempsurface.get_width()) / 2, accumulated_height))
                 elif justification == 2:
-                    surface.blit(tempsurface, (rect.width - tempsurface.get_width(), accumulated_height))
+                    surface.blit(tempsurface, (rect.width+rectwidth_adjust - tempsurface.get_width(), accumulated_height))
                 else:
                     print("ERROR")
             accumulated_height += font.size(line)[1]
