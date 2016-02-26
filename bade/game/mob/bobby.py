@@ -9,7 +9,7 @@ class Bobby:
     def __init__(self, graphics):
         self.graphics = graphics
 
-        self.bobby_img = pygame.transform.scale(self.graphics["Chris.png"], (c.TILE_SIZE, c.TILE_SIZE))
+        self.bobby_img = pygame.transform.scale(self.graphics["chris.png"], (c.TILE_SIZE, c.TILE_SIZE))
 
         self.pos = [1*c.TILE_SIZE, 1*c.TILE_SIZE]
 
@@ -166,24 +166,24 @@ class Bobby:
     def draw(self):
         render = pygame.Surface((c.TILE_SIZE, c.TILE_SIZE), pygame.SRCALPHA)
 
-        if self.looking_at == "up":
-            pass
+        #if self.looking_at == "up":
+        #    pass
 
-        if self.looking_at == "right":
-            if self.looking_atH == "left":
-                self.bobby_img = pygame.transform.flip(self.bobby_img, True, False)
+        #if self.looking_at == "right":
+        #    if self.looking_atH == "left":
+        #        self.bobby_img = pygame.transform.flip(self.bobby_img, True, False)
 
-            self.looking_atH = "right"
+        #    self.looking_atH = "right"
 
-        if self.looking_at == "down":
-            #sprite = pygame.transform.flip(sprite, False, True)
-            pass
+        #if self.looking_at == "down":
+        #    #sprite = pygame.transform.flip(sprite, False, True)
+        #    pass
 
-        if self.looking_at == "left":
-            if self.looking_atH == "right":
-                self.bobby_img = pygame.transform.flip(self.bobby_img, True, False)
+        #if self.looking_at == "left":
+        #    if self.looking_atH == "right":
+        #        self.bobby_img = pygame.transform.flip(self.bobby_img, True, False)
 
-            self.looking_atH = "left"
+        #    self.looking_atH = "left"
 
         self.looking_at = ""
 

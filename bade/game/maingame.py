@@ -157,14 +157,24 @@ class MainGame(object):
                 pnj_name = bob_value.split(' ')[1]
 
             elif in_dial:
+                bobby_talk = False
+
                 my_font = pygame.font.Font("res/ubuntumono-r.ttf", 22)
                 my_string = levels.chars[pnj_name]["dials"][str(dial_count)]
+                if my_string[0] == "*":
+                    bobby_talk = True
+                    my_string = my_string[1:]
+
                 my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
                 rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 20, 200), 0)
                 self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
                 # TODO: Change head if ":" or "*"
-                head = pygame.transform.scale(self.graphics["mario_head.png"], (200, rendered_text.get_height()))
+                if bobby_talk:
+                    head = pygame.transform.scale(self.graphics["chris_head.png"], (175, rendered_text.get_height()+50))
+                else:
+                    head = pygame.transform.scale(self.graphics[pnj_name + "_head.png"], (175, rendered_text.get_height()+50))
+
                 self.screen.blit(head, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
                 continue_font = my_font
@@ -172,6 +182,7 @@ class MainGame(object):
                 dial_left = "(" + str(dial_count) + "/" + str(len(levels.chars[pnj_name]["dials"])) + ")"
                 continue_font_rendered = continue_font.render("Press Enter to continue... " + dial_left, 1, (150, 150, 150))
                 self.screen.blit(continue_font_rendered, (c.WINDOW_WIDTH-continue_font_rendered.get_width(), c.WINDOW_HEIGHT - continue_font_rendered.get_height()))
+
             pygame.display.flip()
 
         print("exiting __game")

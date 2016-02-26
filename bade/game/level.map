@@ -50,14 +50,14 @@ north = outside3
 east = home
 
 [?]
-file = mario_right.png
+file = akitoki.png
 block = true
 pnj = true
-pnj_file = alex
+pnj_file = akitoki
 
 [.]
-name = grass1
-file = grass1.png
+name = grass3
+file = grass3.png
 block = false
 pnj = false
 
@@ -71,11 +71,5 @@ pnj = false
 name = tree
 file = tree.png
 block = true
-pnj = false
-
-[1]
-name = oldone
-file = oldone.png
-block = false
 pnj = false
 
