@@ -9,7 +9,7 @@ class Bobby:
     def __init__(self, graphics):
         self.graphics = graphics
 
-        self.bobby_img = pygame.transform.scale(self.graphics["chris.png"], (c.TILE_SIZE, c.TILE_SIZE))
+        self.bobby_img = pygame.transform.scale(self.graphics["bobby.png"], (c.TILE_SIZE, c.TILE_SIZE))
 
         self.pos = [1*c.TILE_SIZE, 1*c.TILE_SIZE]
 

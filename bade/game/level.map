@@ -1,32 +1,27 @@
 [home]
 map = wwwwwwwwww
-      w........w
-      w..w..?...
-      ..........
-      w........w
+      w~......Hw
+      w.....?.__
+      w_________
+      w..hTl...w
       wwwwwwwwww
 east = outside1
-west = outside4
 
 [outside1]
-map = mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-      m.............................m
-      ..............................m
-      ..............................m
-      m.............................m
-      m.............................m
-      m.............................m
-      m.............................m
-      m.............................m
-      m..mmmmmmmmmmmmmmmmmmmmmmmmmmmm
+map = mmmmmmmmmmmmmmm
+      m.............m
+      ..............m
+      ..............m
+      m.............m
+      m..mmmmmmmmmmmm
 west = home
 south = outside2
 
 [outside2]
-map = w..www
-      w.....
-      w.....
-      wwwwww
+map = i..iii
+      i.....
+      i.....
+      iiiiii
 north = outside1
 east = outside3
 
@@ -47,7 +42,7 @@ map = wwww..wwww
       w........w
       wwwwwwwwww
 north = outside3
-east = home
+east = outside4
 
 [?]
 file = akitoki.png
@@ -55,21 +50,62 @@ block = true
 pnj = true
 pnj_file = akitoki
 
+[h]
+name = chair
+file = chair.png
+block = false
+pnj = false
+
+[l]
+name = chair reverse
+file = chair_reverse.png
+block = false
+pnj = false
+
+[T]
+name = table
+file = table.png
+block = true
+pnj = false
+
+[~]
+name = carpet
+file = carpet.png
+block = false
+pnj = false
+
+[H]
+name = fridge
+file = fridge.png
+block = false
+pnj = false
+
 [.]
 name = grass3
 file = grass3.png
 block = false
 pnj = false
 
+[_]
+name = dirt
+file = gravel.png
+block = false
+pnj = false
+
 [w]
 name = wall
-file = wall2.png
+file = wall_brick.png
 block = true
 pnj = false
 
 [m]
-name = tree
-file = tree.png
+name = tree round
+file = tree_round.png
 block = true
 pnj = false
 
+[i]
+name = simple dark tree
+file = tree_simpledark.png
+block = true
+pnj = false

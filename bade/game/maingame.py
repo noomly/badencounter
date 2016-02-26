@@ -163,7 +163,9 @@ class MainGame(object):
                 my_string = levels.chars[pnj_name]["dials"][str(dial_count)]
                 if my_string[0] == "*":
                     bobby_talk = True
-                    my_string = my_string[1:]
+                    my_string = "<Bobby>  " + my_string[1:]
+                else:
+                    my_string = "<" + pnj_name[0].upper() + pnj_name[1:] + ">  " + my_string
 
                 my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
                 rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 20, 200), 0)
@@ -171,7 +173,7 @@ class MainGame(object):
 
                 # TODO: Change head if ":" or "*"
                 if bobby_talk:
-                    head = pygame.transform.scale(self.graphics["chris_head.png"], (175, rendered_text.get_height()+50))
+                    head = pygame.transform.scale(self.graphics["bobby_head.png"], (175, rendered_text.get_height()+50))
                 else:
                     head = pygame.transform.scale(self.graphics[pnj_name + "_head.png"], (175, rendered_text.get_height()+50))
 
