@@ -168,7 +168,7 @@ class MainGame(object):
                     my_string = "<" + pnj_name[0].upper() + pnj_name[1:] + ">  " + my_string
 
                 my_rect = pygame.Rect((0, 0, c.WINDOW_WIDTH, c.WINDOW_HEIGHT/4))
-                rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 20, 200), 0)
+                rendered_text = Dialog().render_textrect(my_string, my_font, my_rect, (216, 216, 216), (0, 0, 20, 225), 0)
                 self.screen.blit(rendered_text, (0, c.WINDOW_HEIGHT - rendered_text.get_height()))
 
                 # TODO: Change head if ":" or "*"

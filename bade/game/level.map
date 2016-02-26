@@ -1,26 +1,27 @@
 [home]
 map = wwwwwwwwww
-      w~......Hw
-      w.....?.__
-      w_________
-      w..hTl...w
+      w~,,,,,,Hw
+      w,,,,,?,,,
+      w,,,,,,,,,
+      w,,hTl,,,w
       wwwwwwwwww
 east = outside1
 
 [outside1]
 map = mmmmmmmmmmmmmmm
       m.............m
-      ..............m
-      ..............m
-      m.............m
-      m..mmmmmmmmmmmm
+      __............m
+      __............m
+      m__...........m
+      m__mmmmmmmmmmmm
 west = home
 south = outside2
 
 [outside2]
-map = i..iii
-      i.....
-      i.....
+map = i__iii
+      i_____
+      i.____
+      i.!..i
       iiiiii
 north = outside1
 east = outside3
@@ -49,6 +50,12 @@ file = akitoki.png
 block = true
 pnj = true
 pnj_file = akitoki
+
+[!]
+file = akira.png
+block = true
+pnj = true
+pnj_file = akira
 
 [h]
 name = chair
@@ -81,14 +88,20 @@ block = false
 pnj = false
 
 [.]
-name = grass3
+name = light grass
 file = grass3.png
+block = false
+pnj = false
+
+[,]
+name = plank
+file = plank.jpg
 block = false
 pnj = false
 
 [_]
 name = dirt
-file = gravel.png
+file = dirt.png
 block = false
 pnj = false
 
