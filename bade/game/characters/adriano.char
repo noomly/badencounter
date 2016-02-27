@@ -1,11 +1,12 @@
-﻿[infos]
+﻿
+[infos]
 name = Adriano
 
 [dials]
 1 = Hello my name is Adriano. I can speak to you about the Temple of the People?
 2 = *Yes of course, is it a sect?
-3 = Yes but it was a sect! 
-4 = *Why? Explain me! 
+3 = Yes but it was a sect!
+4 = *Why? Explain me!
 5 = The Temple of the People is recognized like one of the sects most dangerous in the world. This religious movement was founded in 1955 by Jim Jones.
 6 = *She was known before ?
 7 = The sect knew a "golden age" during years 1970, because the Temple of the People got bigger in several American States.
@@ -28,7 +29,7 @@ name = Adriano
 24 = Some people avoid but Jim Jones no like that. So, he decided to organize a collective suicide. Because without them he had nothing more.
 25 = *In this sect , what was the role of Jones ?
 26 = He made cure but supernatural and strange and he claims his ideals.
-27 = *But why do you explain me every things? 
+27 = *But why do you explain me every things?
 28 = You know Bobby, you can be agree or disagree. Because you don't know it is true or false, Don't believe everything they tell you.
 29 = In fact, the story about a Temple Of People that I told you, it is it so that you understand !
 30 = A sect is not a family, but a parasite who want that you obeys their rules ! Just this , no family , no love.

@@ -57,7 +57,9 @@ class Level(object):
                     char_final = char.split('.')[0]
 
                     parser = configparser.ConfigParser()
-                    parser.read(str(subdir) + "/" + str(char))
+                    ini_file = open(str(subdir) + "/" + str(char), 'r')
+                    ini_file.readline()
+                    parser.readfp(ini_file)
 
                     for section in parser.sections():
                         if section == "infos":
