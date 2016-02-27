@@ -1,19 +1,251 @@
-[level]
-map = ..........
-      .########.
-      .#......#.
-      .#...##.#.
-      .##.##..#.
-      .....####.
+[home]
+map = wwwwwwwwww
+      w~,,,,,,Hw
+      w,,,,,1,,,
+      w,,,,,,,,,
+      w,,hTl,,,w
+      wwwwwwwwww
+east = outside1
+
+[outside1]
+map = mmmmmmmmmmm..
+      m.....y...mm.
+      __;....I:I.mm
+      _;__;__:2:I.m
+      m__....:::mmm
+      m_;mmmmmmmm..
+west = home
+south = outside2
+
+[outside2]
+map = i_;iii
+      i_;___
+      i;___i
+      iy3y.i
+      iiiiii
+north = outside1
+east = outside3
+
+[outside3]
+map = IIIIIII
+      ___.y.I
+      I._-.4I
+      II-_..I
+      .II_--I
+      ..II--I
+west = outside2
+south = outside4
+
+[outside4]
+map = zzzz,,zzzz
+      z,,,,,,,,z
+      z,,,,,,,,,
+      z,,,,,,,,z
+      z,,5,,,,,z
+      z,,,,,,,,z
+      zzzzzzzzzz
+north = outside3
+east = outside5
+
+[outside5]
+map = mmmmmmm
+      m==m=6m
+      __====m
+      m______
+      mmmmmmm
+west = outside4
+east = outside6
+
+[outside6]
+map = mImmmII
+      m..;;7m
+      I..;y.m
+      _;;;;.I
+      mmmm;Im
+west = outside5
+south = outside7
+
+[outside7]
+map = IIII;IIIII
+      Iy8m_....I
+      __.m___;_I
+      I__mIII_;I
+      I;_.I._;I.
+      I;;.II_Iy.
+      Iy;____I.y
+      IIIIIIII..
+west = end
+north = outside6
+
+[end]
+map = mmmmmmmmmmmmmmmmm
+      m;;;;;.;.;.;;;..m
+      m..;...;;;.;;..__
+      _..;...;;;.;..._m
+      _..;...;.;.;;;__m
+      ________________m
+      _;;;.;..;.;;....m
+      _;;..;;.;.;.;...m
+      m;...;.;;.;..;yym
+      m;;;.;..;.;;;.yym
+      mmmmmmmmmmmmmmmmm
+west = credits
+
+[credits]
+map = m
+
+[1]
+file = mom.png
+block = true
+pnj = true
+pnj_file = mom
+
+[2]
+file = akira.png
+block = true
+pnj = true
+pnj_file = akira
+
+[3]
+file = maguy.png
+block = true
+pnj = true
+pnj_file = maguy
+
+[4]
+file = akitoki.png
+block = true
+pnj = true
+pnj_file = akitoki
+
+[5]
+file = policeman.png
+block = true
+pnj = true
+pnj_file = policeman
+
+[6]
+file = john.png
+block = true
+pnj = true
+pnj_file = john
+
+[7]
+file = bae.png
+block = true
+pnj = true
+pnj_file = bae
+
+[8]
+file = adriano.png
+block = true
+pnj = true
+pnj_file = adriano
+
+[h]
+name = chair
+file = chair.png
+block = false
+pnj = false
+
+[l]
+name = chair reverse
+file = chair_reverse.png
+block = false
+pnj = false
+
+[T]
+name = table
+file = table.png
+block = true
+pnj = false
+
+[~]
+name = carpet
+file = carpet.png
+block = false
+pnj = false
+
+[H]
+name = fridge
+file = fridge.png
+block = false
+pnj = false
+
+[y]
+name = flower
+file = flower.png
+block = false
+pnj = false
 
 [.]
-name = floor
-tile = grass.png
-wall = false
+name = light grass
+file = grass3.png
 block = false
+pnj = false
 
-[#]
-name = wall
-tile = wall.png
-wall = true
+[:]
+name = flower grass
+file = grass1.png
+block = false
+pnj = false
+
+[=]
+name = dark grass
+file = grass2.png
+block = false
+pnj = false
+
+[,]
+name = plank
+file = plank.jpg
+block = false
+pnj = false
+
+[_]
+name = dirt
+file = dirt.png
+block = false
+pnj = false
+
+[;]
+name = gravel
+file = gravel.png
+block = false
+pnj = false
+
+[-]
+name = sand
+file = sand.png
+block = false
+pnj = false
+
+[w]
+name = brick wall
+file = wall_brick.png
 block = true
+pnj = false
+
+[z]
+name = police station brick
+file = wall_brightbrick.png
+block = true
+pnj = false
+
+[m]
+name = tree round
+file = tree_round.png
+block = true
+pnj = false
+
+[i]
+name = simple dark tree
+file = tree_simpledark.png
+block = true
+pnj = false
+
+[I]
+name = big tree
+file = tree.png
+block = true
+pnj = false
