@@ -174,11 +174,18 @@ class Level(object):
         for y, line in enumerate(self.maps[self.currentmap]["map"]):
             for x, char in enumerate(line):
                 if self.currentmap == "home":
-                    render.blit(pygame.transform.scale(self.graphics["plank.jpg"],
-                                                    (c.TILE_SIZE, c.TILE_SIZE)),
-                                                    (x*c.TILE_SIZE, y*c.TILE_SIZE))
+                    ground = "plank.jpg"
+
+                elif self.currentmap == "outside4":
+                    ground = "plank.jpg"
+
+                elif self.currentmap == "outside5":
+                    ground = "grass2.png"
+
                 else:
-                    render.blit(pygame.transform.scale(self.graphics["grass3.png"],
+                    ground = "grass3.png"
+
+                render.blit(pygame.transform.scale(self.graphics[ground],
                                                     (c.TILE_SIZE, c.TILE_SIZE)),
                                                     (x*c.TILE_SIZE, y*c.TILE_SIZE))
 

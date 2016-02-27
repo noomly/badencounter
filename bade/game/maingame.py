@@ -23,7 +23,7 @@ class MainGame(object):
     def main_loop(self):
         print("entering main_loop")
 
-        state = "MENU" # MENU, GAME, CREDITS, EXIT
+        state = "MENU" # MENU, GAME, HOWTOPLAY, CREDITS, EXIT
 
         while state != "EXIT":
             if state == "MENU":
@@ -31,6 +31,9 @@ class MainGame(object):
 
             if state == "GAME":
                 state = self.__game()
+
+            if state == "HOWTOPLAY":
+                state = self.__how_to_play()
 
             if state == "CREDITS":
                 state = self.__credits()
@@ -41,7 +44,7 @@ class MainGame(object):
     def __menu(self):
         print("entering __menu")
 
-        menu = Menu(self.graphics, ("play", "credits", "exit"))
+        menu = Menu(self.graphics, ("play", "how to play", "exit"))
 
         state_to_return = "EXIT"
         goon = True
@@ -62,9 +65,13 @@ class MainGame(object):
                 state_to_return = "GAME"
                 goon = False
 
-            if choice == "credits":
-                state_to_return = "CREDITS"
+            if choice == "how to play":
+                state_to_return = "HOWTOPLAY"
                 goon = False
+
+            #if choice == "credits":
+            #    state_to_return = "CREDITS"
+            #    goon = False
 
             if choice == "exit":
                 state_to_return = "EXIT"
@@ -116,9 +123,13 @@ class MainGame(object):
 
                 if in_dial:
                     if event.type == pygame.KEYUP:
+                        if event.key == pygame.K_ESCAPE:
+                            in_dial = False
+                            pnj_name = "null"
+                            dial_count = 1
+
                         if event.key == pygame.K_RETURN:
                             dial_count += 1
-
                             if dial_count > len(levels.chars[pnj_name]["dials"]):
                                 in_dial = False
                                 pnj_name = "null"
@@ -136,6 +147,11 @@ class MainGame(object):
                 goon = False
 
             levels.update(bob_value, bobby)
+
+            if levels.currentmap == "credits":
+                goon = False
+                state_to_return = "CREDITS"
+                break
 
             if finalrender.get_width() != levels.get_map_size()[0] or finalrender.get_height() != levels.get_map_size()[1]:
                 finalrender = pygame.Surface((levels.get_map_size()[0],
@@ -192,6 +208,82 @@ class MainGame(object):
         return state_to_return
 
 
+    def __how_to_play(self):
+        print("entering __how_to_play")
+
+        background = pygame.transform.scale(self.graphics["credits_background.jpg"], (c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
+
+        font = pygame.font.Font("res/ubuntumono-r.ttf", 22)
+        text = \
+            ["HOW TO PLAY", \
+             "", \
+             "In this game, you will play the role of \"Bobby\" wich is a young man that is,", \
+             "discovering the world.", \
+             "You will be able to move with the four directionnal arrows of your", \
+             "keyboard (up, down, left and right).", \
+             "Bobby begin his journey at home, you will need to talk to your mother,", \
+             "and then move to the next level.", \
+             "To talk to other people, just move to them with the directionnal arrows of", \
+             "your keyboard and then press Enter to go through the dialog.", \
+             "In each level, there will be a man or a woman. You will have to talk with each", \
+             "of them before moving to the next level, in order to discover interesting", \
+             "informations about sects.", \
+             "There will be a road drawn with dirt and gravel which will guide to the", \
+             "the differents levels. Be careful, before getting to the next level,", \
+             "don't forget to talk with the people you will encounter!", \
+             "If you don't find any people on a level, just follow the dirt path to get to", \
+             "the next level.", \
+             "", \
+             "Enjoy !"]
+
+        font_continue = pygame.font.Font("res/ubuntumono-r.ttf", 22)
+        rendered_text_continue = font_continue.render("Click or press Escape or Enter to get back to the menu ...", 1, (150, 150, 150))
+
+        state_to_return = "EXIT"
+        goon = True
+        while goon:
+            # events
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    goon = False
+
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
+                        state_to_return = "MENU"
+                        goon = False
+
+                if event.type == pygame.MOUSEBUTTONUP:
+                    state_to_return = "MENU"
+                    goon = False
+
+            # updates
+
+            # draws
+            finalrender = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
+
+            finalrender.blit(background, (0, 0))
+
+            line_posy = 0
+            for line in text:
+                rendered_text = font.render(line, 1, (240, 190, 255))
+                finalrender.blit(rendered_text, (c.WINDOW_WIDTH/2 - rendered_text.get_width()/2, 100 - rendered_text.get_height() + line_posy))
+                line_posy += font.size(line)[1] + 5
+
+            finalrender.blit(rendered_text_continue, (c.WINDOW_WIDTH/2 - rendered_text_continue.get_width()/2, c.WINDOW_HEIGHT - rendered_text_continue.get_height()-10))
+
+            self.screen.blit(pygame.transform.scale(finalrender,
+                                                    (c.WINDOW_WIDTH,
+                                                     c.WINDOW_HEIGHT)),
+                             (0, 0))
+
+            pygame.display.flip()
+
+            self.clock.tick(30)
+
+        print("exiting __how_to_play")
+
+        return state_to_return
+
     def __credits(self):
         print("entering __credits")
 
@@ -199,7 +291,9 @@ class MainGame(object):
 
         font = pygame.font.Font("res/ubuntumono-r.ttf", 50)
         text = \
-            ["CREDITS :", \
+            ["Thanks for Playing !", \
+             "", \
+             "CREDITS :", \
              "", \
              "Programming : Eyal CHOJNOWSKI", \
              "Drawing : Maréva SEI and Alycia MOLLE"]
@@ -234,7 +328,7 @@ class MainGame(object):
             line_posy = 0
             for line in text:
                 rendered_text = font.render(line, 1, (200, 150, 255))
-                finalrender.blit(rendered_text, (c.WINDOW_WIDTH/2 - rendered_text.get_width()/2, 280 - rendered_text.get_height() + line_posy))
+                finalrender.blit(rendered_text, (c.WINDOW_WIDTH/2 - rendered_text.get_width()/2, 230 - rendered_text.get_height() + line_posy))
                 line_posy += font.size(line)[1] + 5
 
             finalrender.blit(rendered_text_continue, (c.WINDOW_WIDTH/2 - rendered_text_continue.get_width()/2, c.WINDOW_HEIGHT - rendered_text_continue.get_height()-10))
